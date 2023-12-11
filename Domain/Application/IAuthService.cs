@@ -4,5 +4,5 @@ namespace Application;
 
 public interface IAuthService
 {
-    Task<bool> LogInAsync(UserCredentials credentials, CancellationToken cancellationToken);
+    Task<bool> LogInAsync(UserCredentials credentials, CancellationToken? cancellationToken);
 }
