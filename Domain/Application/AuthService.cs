@@ -20,7 +20,7 @@ public abstract class AuthService : IAuthService
         InitializeServiceProvidersInstances(authProviders);
     }
 
-    public async Task<bool> LogInAsync(UserCredentials credentials, CancellationToken? cancellationToken)
+    public async Task<bool> LogInAsync(UserCredentials credentials, CancellationToken? cancellationToken = null)
     {
         Guard.Against.Null(credentials);
 
