@@ -10,7 +10,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Domain\Appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Domain\Core\Core.csproj", "{B300F60A-B871-4579-B3ED-7318D7FDD332}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthProvider.ACME", "Infrastructure\AuthProvider.ACME\AuthProvider.ACME.csproj", "{712DAC70-F052-4EE2-B299-6F82FE759BB5}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1401BE07-5E0C-4143-B915-8CD433371EA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthProvider.MassiveDynamic", "Infrastructure\AuthProvider.MassiveDynamic\AuthProvider.MassiveDynamic.csproj", "{7D1E58D2-9C13-4DC0-AA14-C651E1A331CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthProvider.Globex", "Infrastructure\AuthProvider.Globex\AuthProvider.Globex.csproj", "{6B73773D-38BA-45C0-A2A8-B01B0DD251EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestAPI", "Service\RestAPI\RestAPI.csproj", "{A694BA7E-29BC-43E2-ACE1-A16F93778DC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestAPI.Tests", "Tests\RestAPI.Tests\RestAPI.Tests.csproj", "{D9451009-7518-487C-99D1-1E5A26F08CF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Tests", "Tests\Application.Tests\Application.Tests.csproj", "{AC215ADD-7D7A-45AA-8D7E-E9B51F3ED258}"
 EndProject
