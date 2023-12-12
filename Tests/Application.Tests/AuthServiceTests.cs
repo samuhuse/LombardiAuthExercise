@@ -21,7 +21,7 @@ public class AuthServiceTests
         public FakeAuthProviderA() 
             : base(
                 new Regex(@"^test", RegexOptions.IgnoreCase), 
-                new List<UserCredentials>() {new("testA","testA")}
+                new List<UserCredentials>() {UserCredentials.From("testA","testA")}
                 ) { }
     }
     
@@ -32,8 +32,8 @@ public class AuthServiceTests
                 new Regex(@"^noMatch"), 
                 new List<UserCredentials>()
                 {
-                    new("test","test"),
-                    new("username","password")
+                    UserCredentials.From("test","test"),
+                    UserCredentials.From("username","password")
                 }
             ) { }
     }
@@ -76,7 +76,7 @@ public class AuthServiceTests
     {
         var sut = GetSut();
 
-        var credentials = new UserCredentials("test", "test"); // this credentials is present in FakeAuthProviderB but is considered FakeAuthProviderA exclusive 
+        var credentials =  UserCredentials.From("test", "test"); // this credentials is present in FakeAuthProviderB but is considered FakeAuthProviderA exclusive 
 
         var result = await sut.LogInAsync(credentials); 
         
@@ -88,7 +88,7 @@ public class AuthServiceTests
     {
         var sut = GetSut();
 
-        var credentials = new UserCredentials("username", "password"); 
+        var credentials = UserCredentials.From("username", "password"); 
 
         var result = await sut.LogInAsync(credentials); 
         
@@ -100,7 +100,7 @@ public class AuthServiceTests
     {
         var sut = GetSut();
 
-        var credentials = new UserCredentials("XXXX", "XXXX"); 
+        var credentials = UserCredentials.From("XXXX", "XXXX"); 
 
         var result = await sut.LogInAsync(credentials); 
         
