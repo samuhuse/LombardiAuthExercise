@@ -13,7 +13,7 @@ public static class ServiceCollectionExtensions
 {  
     public static IServiceCollection AddAuthProviders(this IServiceCollection serviceCollection)
     {
-        ForceInfrastructureAssembliesLoad();
+        ForceInfrastructureAssembliesLoading();
         
         var authProviderTypes =   
             AppDomain.CurrentDomain.GetAssemblies()  
@@ -25,7 +25,7 @@ public static class ServiceCollectionExtensions
         return serviceCollection;  
     }
 
-    private static void ForceInfrastructureAssembliesLoad()
+    private static void ForceInfrastructureAssembliesLoading()
     {
         foreach (var name in Directory.GetFiles(
                      AppDomain.CurrentDomain.BaseDirectory, "*.dll").Where(r => 

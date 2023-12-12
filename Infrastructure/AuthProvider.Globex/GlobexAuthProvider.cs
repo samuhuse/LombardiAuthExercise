@@ -7,7 +7,7 @@ public class GlobexAuthProvider : IAuthProvider
 {
     private readonly List<UserCredentials> _userCredentials = new()
     {
-        new("Cinzia", "StrongPassword")
+        UserCredentials.From("Cinzia", "StrongPassword")
     };
     
     public Task<bool> IsExclusiveAsync(UserCredentials credentials, CancellationToken? cancellationToken)

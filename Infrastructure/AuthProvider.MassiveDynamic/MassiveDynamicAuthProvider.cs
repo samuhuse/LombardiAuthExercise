@@ -8,7 +8,7 @@ public class MassiveDynamicAuthProvider : IAuthProvider
 {
     private readonly List<UserCredentials> _userCredentials = new()
     {
-        new("Omid", "PrettyPassword")
+        UserCredentials.From("Omid", "PrettyPassword")
     };
     
     public Task<bool> IsExclusiveAsync(UserCredentials credentials, CancellationToken? cancellationToken)

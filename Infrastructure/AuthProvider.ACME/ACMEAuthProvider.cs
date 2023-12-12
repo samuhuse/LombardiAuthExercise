@@ -10,8 +10,8 @@ public class ACMEAuthProvider : IAuthProvider
 
     private readonly List<UserCredentials> _userCredentials = new()
     {
-        new("Samuele", "SuperPassword"),
-        new("Giovanni","WeakPassword")
+        UserCredentials.From("acme/Samuele", "SuperPassword"),
+        UserCredentials.From("acme/Giovanni","WeakPassword")
     };
     
     public Task<bool> IsExclusiveAsync(UserCredentials credentials, CancellationToken? cancellationToken)
