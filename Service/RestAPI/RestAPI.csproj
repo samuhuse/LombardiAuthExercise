@@ -17,6 +17,7 @@
       <ProjectReference Include="..\..\Infrastructure\AuthProvider.ACME\AuthProvider.ACME.csproj" />
       <ProjectReference Include="..\..\Infrastructure\AuthProvider.Globex\AuthProvider.Globex.csproj" />
       <ProjectReference Include="..\..\Infrastructure\AuthProvider.MassiveDynamic\AuthProvider.MassiveDynamic.csproj" />
+      <ProjectReference Include="..\LogIn.API\LogIn.API.csproj" />
     </ItemGroup>
 
 </Project>
