@@ -5,8 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Tests;
 
-
-
 public class AuthServiceTests
 {
     protected class AuthServiceImplementation : AuthService

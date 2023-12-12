@@ -1,11 +1,9 @@
 using Application;
-using Carter;
 using LogIn.API.Configuration;
 using RestAPI;
 using RestAPI.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -29,4 +27,8 @@ app.UseHttpsRedirection();
 app.MapLogInModule();
 
 app.Run();
+
+public partial class Program{}
+
+
 

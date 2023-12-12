@@ -2,5 +2,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9bc4d8c2_002De349_002D4710_002Dbbc3_002D739f2754256f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Wrong_provider_type_throw_InvalidArgumentException" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::AC215ADD-7D7A-45AA-8D7E-E9B51F3ED258::net8.0::Application.Tests.AuthServiceTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::F94424A3-F35A-4B95-9202-233748963F1A::net8.0::RestAPI.Tests.LogInTests.LogIn_respond_with_200_status_code_with_correct_credential&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::F94424A3-F35A-4B95-9202-233748963F1A::net8.0::RestAPI.Tests.LogInTests.LogIn_respond_with_401_status_code_with_incorrect_credential&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
