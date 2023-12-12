@@ -20,6 +20,15 @@ public record UserCredentials
 
         return new(userName, password);
     }
-    
-    public virtual bool Equals(UserCredentials? other) => string.Equals(UserName,other?.UserName,StringComparison.OrdinalIgnoreCase) && Password == other?.Password;
+
+    public virtual bool Equals(UserCredentials? other)
+    {
+        if (other is null) return false;
+        
+        string[] usernameSegments = other.UserName.Split('\\');
+
+        return 
+            string.Equals(UserName, usernameSegments[^1], StringComparison.OrdinalIgnoreCase) &&
+            Password == other.Password;
+    }
 }

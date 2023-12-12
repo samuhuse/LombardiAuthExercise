@@ -9,7 +9,7 @@ namespace RestAPI.Tests;
 public class LogInTests
 {
     [Theory]
-    [InlineData("Samuele", "SuperPassword")]
+    [InlineData("acme\\Samuele", "SuperPassword")]
     [InlineData("Omid", "PrettyPassword")]
     [InlineData("Cinzia", "StrongPassword")]
     [InlineData("Giovanni", "WeakPassword")]
