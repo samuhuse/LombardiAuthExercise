@@ -36,6 +36,7 @@ public class LogInModule: ICarterModule
          {
              ctx.Response.StatusCode = 401;
              await ctx.Response.Negotiate("Invalid username or password. Please try again", cancellationToken);
+             return;
          }
  
          ctx.Response.StatusCode = 200;
