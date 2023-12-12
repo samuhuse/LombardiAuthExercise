@@ -26,11 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
-
-app.MapCarter();
-
-
+app.MapLogInModule();
 
 app.Run();
 
