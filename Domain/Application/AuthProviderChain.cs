@@ -78,7 +78,7 @@ public class AuthProviderChain : IAuthProvider
         
         else if (await _provider.LogInAsync(credentials, cancellationToken)) return true;
         
-        return await (_next?.LogInAsync(credentials, cancellationToken) ?? Task.FromResult(false));
+        return _next is not null && await _next.LogInAsync(credentials, cancellationToken);
     }
     
     private async Task<bool> ThereIsExclusive(UserCredentials credentials, CancellationToken? cancellationToken)
@@ -88,7 +88,7 @@ public class AuthProviderChain : IAuthProvider
             _isExclusiveProvider = true;
             return true;
         }
-        return await (_next?.IsExclusiveAsync(credentials, cancellationToken) ?? Task.FromResult(false));
+        return _next is not null && await _next.ThereIsExclusive(credentials, cancellationToken);
     }
 
 
