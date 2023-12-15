@@ -7,10 +7,16 @@ namespace Application.Tests;
 
 public class AuthServiceTests
 {
-    protected class AuthServiceImplementation : AuthService
+    protected class AuthServiceImplementation : IAuthService
     {
-        internal AuthServiceImplementation(IServiceProvider serviceProvider, IEnumerable<Type> authProviders) : base(serviceProvider, authProviders)
+        private readonly AuthServiceChain _chain = AuthServiceChain.Builder
+            .CreateChain(new FakeAuthProviderA())
+            .AddNext(new FakeAuthProviderB())
+            .Build();
+
+        public Task<bool> LogInAsync(UserCredentials credentials, CancellationToken? cancellationToken)
         {
+            return _chain.LogInAsync(credentials, cancellationToken);
         }
     }
 
@@ -35,48 +41,25 @@ public class AuthServiceTests
                 }
             ) { }
     }
-    
-    protected IServiceCollection ServiceProvider = new ServiceCollection();
-    
-    protected AuthServiceImplementation GetSut() => new AuthServiceImplementation(
-        ServiceProvider.BuildServiceProvider(),
-        new[]
-        {
-            typeof(FakeAuthProviderA),
-            typeof(FakeAuthProviderB)
-        }
-    );
 
-    public AuthServiceTests()
-    {
-        ServiceProvider.AddScoped<FakeAuthProviderA>();
-        ServiceProvider.AddScoped<FakeAuthProviderB>();
-    }
     
-    [Fact]
-    public void Wrong_provider_type_throw_InvalidArgumentException()
-    {
-        var act = () =>  new AuthServiceImplementation(
-            ServiceProvider.BuildServiceProvider(),
-            new[]
-            {
-                typeof(FakeAuthProviderA),
-                typeof(FakeAuthProviderB),
-                typeof(List<string>)
-            }
-        );
-
-        act.Should().Throw<ArgumentException>();
-    }
     
     [Fact]
     public async Task Invoke_Only_Exclusive_Provider()
     {
-        var sut = GetSut();
+        var sut = new AuthServiceImplementation();
 
-        var credentials =  UserCredentials.From("test", "test"); // this credentials is present in FakeAuthProviderB but is considered FakeAuthProviderA exclusive 
+        var credentials = UserCredentials.From("username", "password"); 
 
-        var result = await sut.LogInAsync(credentials); 
+        var result = await sut.LogInAsync(credentials, null); 
+        
+        result.Should().BeTrue();
+        
+         sut = new AuthServiceImplementation();
+
+         credentials =  UserCredentials.From("test", "test"); // this credentials is present in FakeAuthProviderB but is considered FakeAuthProviderA exclusive 
+
+         result = await sut.LogInAsync(credentials, null); 
         
         result.Should().BeFalse();
     }
@@ -84,11 +67,11 @@ public class AuthServiceTests
     [Fact]
     public async Task Service_logIn_success_with_existing_credentials()
     {
-        var sut = GetSut();
+        var sut = new AuthServiceImplementation();
 
         var credentials = UserCredentials.From("username", "password"); 
 
-        var result = await sut.LogInAsync(credentials); 
+        var result = await sut.LogInAsync(credentials, null); 
         
         result.Should().BeTrue();
     }
@@ -96,11 +79,11 @@ public class AuthServiceTests
     [Fact]
     public async Task Service_logIn_failure_with_non_existing_credentials()
     {
-        var sut = GetSut();
+        var sut = new AuthServiceImplementation();
 
         var credentials = UserCredentials.From("XXXX", "XXXX"); 
 
-        var result = await sut.LogInAsync(credentials); 
+        var result = await sut.LogInAsync(credentials, null); 
         
         result.Should().BeFalse();
     }

@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAuthService, DefaultAuthService>();
 
 builder.Services.AddLogInModule();
-builder.Services.AddAuthProviders();
+// builder.Services.AddAuthProviders();
 
 var app = builder.Build();
 

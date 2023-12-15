@@ -3,19 +3,20 @@ using Application;
 using AuthProvider.ACME;
 using AuthProvider.Globex;
 using AuthProvider.MassiveDynamic;
+using Core;
 
 namespace RestAPI;
 
-public class DefaultAuthService : AuthService  
-{  
-    //  Invoked in this sequence  
-    static readonly Type[] AuthProviders = new[]  
-    {  
-        typeof(ACMEAuthProvider),  
-        typeof(MassiveDynamicAuthProvider),  
-        typeof(GlobexAuthProvider)  
-        // ...  
-    };  
-    
-    public DefaultAuthService(IServiceProvider serviceProvider) : base(serviceProvider, AuthProviders) { }
+public class DefaultAuthService : IAuthService
+{
+    private readonly AuthServiceChain _chain = AuthServiceChain.Builder
+        .CreateChain(new ACMEAuthProvider())
+        .AddNext(new MassiveDynamicAuthProvider())
+        .AddNext(new GlobexAuthProvider())
+        .Build();
+
+    public Task<bool> LogInAsync(UserCredentials credentials, CancellationToken? cancellationToken)
+    {
+        return _chain.LogInAsync(credentials, cancellationToken);
+    }
 }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LogIn.API.Routing;
 
-public class LogInModule: ICarterModule
+public class LogInModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
