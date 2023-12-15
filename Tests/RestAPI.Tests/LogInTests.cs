@@ -10,6 +10,7 @@ public class LogInTests
 {
     [Theory]
     [InlineData("acme\\Samuele", "SuperPassword")]
+    [InlineData("Samuele", "SuperPassword")]
     [InlineData("Omid", "PrettyPassword")]
     [InlineData("Cinzia", "StrongPassword")]
     [InlineData("Giovanni", "WeakPassword")]
