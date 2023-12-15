@@ -9,7 +9,7 @@ public class AuthServiceTests
 {
     protected class AuthServiceImplementation : IAuthService
     {
-        private readonly AuthServiceChain _chain = AuthServiceChain.Builder
+        private readonly AuthProviderChain _chain = AuthProviderChain.Builder
             .CreateChain(new FakeAuthProviderA())
             .AddNext(new FakeAuthProviderB())
             .Build();

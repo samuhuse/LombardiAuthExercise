@@ -9,7 +9,7 @@ namespace RestAPI;
 
 public class DefaultAuthService : IAuthService
 {
-    private readonly AuthServiceChain _chain = AuthServiceChain.Builder
+    private readonly AuthProviderChain _chain = AuthProviderChain.Builder
         .CreateChain(new ACMEAuthProvider())
         .AddNext(new MassiveDynamicAuthProvider())
         .AddNext(new GlobexAuthProvider())

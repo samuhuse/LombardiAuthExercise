@@ -2,14 +2,14 @@ using Core;
 
 namespace Application;
 
-public class AuthServiceChain : IAuthProvider
+public class AuthProviderChain : IAuthProvider
 {
     public class Builder
     {
-        private readonly AuthServiceChain _rootChain;
-        private AuthServiceChain _currentChainElement;
+        private readonly AuthProviderChain _rootChain;
+        private AuthProviderChain _currentChainElement;
         
-        private Builder(AuthServiceChain rootChain)
+        private Builder(AuthProviderChain rootChain)
         {
             _rootChain = rootChain;
             _currentChainElement = rootChain;
@@ -17,20 +17,20 @@ public class AuthServiceChain : IAuthProvider
 
         public static Builder CreateChain(IAuthProvider provider)
         {
-            var chain = new AuthServiceChain(provider, new SharedState());
+            var chain = new AuthProviderChain(provider, new SharedState());
             return new Builder(chain);
         }
 
         public Builder AddNext(IAuthProvider provider)
         {
-            var nextChainElement = new AuthServiceChain(provider, _rootChain.State);
+            var nextChainElement = new AuthProviderChain(provider, _rootChain.State);
             _currentChainElement.SetNext(nextChainElement);
             _currentChainElement = nextChainElement;
 
             return this;
         }
 
-        public AuthServiceChain Build() => _rootChain;
+        public AuthProviderChain Build() => _rootChain;
     }
 
     protected class SharedState
@@ -40,19 +40,19 @@ public class AuthServiceChain : IAuthProvider
     }
     
     private readonly IAuthProvider _provider;
-    private AuthServiceChain? _next;
+    private AuthProviderChain? _next;
 
     protected readonly SharedState State;
 
     private bool _isExclusiveProvider = false;
 
-    private AuthServiceChain(IAuthProvider provider, SharedState state)
+    private AuthProviderChain(IAuthProvider provider, SharedState state)
     {
         _provider = provider;
         State = state;
     }
 
-    public AuthServiceChain SetNext(AuthServiceChain next)
+    public AuthProviderChain SetNext(AuthProviderChain next)
     {
         _next = next;
         return next;
